@@ -98,9 +98,7 @@ class App extends React.Component {
         competing to win {web3.utils.fromWei(contractBalance, 'ether')} Ether!
         </p>
 
-        <hr></hr>
-
-      {/* Enter into lottery */}
+      <hr></hr>
       {
         players.indexOf(account) === -1 && account !== manager ? 
           <form onSubmit={this.onSubmit}>  
@@ -119,8 +117,6 @@ class App extends React.Component {
       }
       
         <hr></hr>
-
-        {/* Manger pick a winner */}
         {
           account === manager &&
           <div>
