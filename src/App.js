@@ -39,22 +39,6 @@ class App extends React.Component {
       currentRound,
       walletEthBalance
     });
-
-    lottery.events.Enter({}, (error, event) => {
-      console.log(event);
-      console.log(event.returnValues['0']);
-      const players = event.returnValues['0'];
-      const contractBalance = event.returnValues['1'];
-
-      const formatedPlayers = players.map(player => {
-        return player.toLowerCase()
-      });
-
-      this.setState({ 
-        players:formatedPlayers,
-        contractBalance,
-      });
-    });
   }
 
   onSubmit = async (event) => {
