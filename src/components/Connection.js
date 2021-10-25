@@ -17,12 +17,9 @@ export default function Connection() {
             update(dispatch)
         
             window.ethereum.on('accountsChanged', async () => { 
-                console.log('account change')
                 await update(dispatch) 
             });
             window.ethereum.on('chainChanged', async () => {
-                //  await update(dispatch)
-                console.log('network change')
                 window.location.reload();
             });
         }
@@ -38,11 +35,11 @@ export default function Connection() {
             {/* connect wallet */}
             {account === null ?
               <div>
-                <button className="btn btn-primary connect-wallet-button" onClick={(e) => doConnectWallet(e)}>Sign in with metamask Wallet</button>
+                <button className="btn btn-primary connect-wallet-button" onClick={(e) => doConnectWallet(e)}>Connect metamask wallet</button>
               </div>
               :
               <div>
-                <button className="btn btn-primary connect-wallet-button" onClick={(e) => doDisConnectWallet(e)}>Sign out</button>
+                <button className="btn btn-primary connect-wallet-button" onClick={(e) => doDisConnectWallet(e)}>Disconnect wallet</button>
               </div>
             }
       </div>

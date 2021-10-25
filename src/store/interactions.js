@@ -8,6 +8,8 @@ import {
   userDataLoaded,
   clear
 } from './actions'
+import Lottery from '../abis/Lottery.json';
+
 
 export const loadWeb3 = async (dispatch) => {
   if(typeof window.ethereum!=='undefined'){
@@ -56,94 +58,10 @@ export const loadBalance = async (dispatch, web3, account) => {
   }
 }
 
-export const loadContract = async (dispatch, web3, network) => {
+export const loadContract = async (dispatch, web3, network, networkId) => {
   try {
     if (network === 'Ropsten') {
-      const contractABI = [
-        {
-          constant: true,
-          inputs: [],
-          name: "manager",
-          outputs: [{ name: "", type: "address" }],
-          payable: false,
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          constant: false,
-          inputs: [],
-          name: "pickWinner",
-          outputs: [],
-          payable: false,
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          constant: true,
-          inputs: [
-            { name: "", type: "address" },
-            { name: "", type: "uint256" },
-          ],
-          name: "activeInLottery",
-          outputs: [{ name: "", type: "bool" }],
-          payable: false,
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          constant: true,
-          inputs: [],
-          name: "currentRound",
-          outputs: [{ name: "", type: "uint256" }],
-          payable: false,
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          constant: true,
-          inputs: [],
-          name: "getPlayers",
-          outputs: [{ name: "", type: "address[]" }],
-          payable: false,
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          constant: false,
-          inputs: [],
-          name: "enter",
-          outputs: [],
-          payable: true,
-          stateMutability: "payable",
-          type: "function",
-        },
-        {
-          constant: true,
-          inputs: [{ name: "", type: "uint256" }],
-          name: "players",
-          outputs: [{ name: "", type: "address" }],
-          payable: false,
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          constant: true,
-          inputs: [],
-          name: "lastWinner",
-          outputs: [{ name: "", type: "address" }],
-          payable: false,
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          payable: false,
-          stateMutability: "nonpayable",
-          type: "constructor",
-        },
-      ];
-      const contractAddress = '0x4b52F9356F1119c102b34316f720996681eb5731'
-      const contract = new web3.eth.Contract(contractABI, contractAddress)
+      const contract = new web3.eth.Contract(Lottery.abi, Lottery.networks[networkId].address)
       dispatch(lotteryContractLoaded(contract)) //create in action.js and add to reducers.js
       return contract
     } else {
@@ -188,8 +106,9 @@ export const update = async (dispatch) => {
 
   web3 = await loadWeb3(dispatch)
   network = await loadNetwork(dispatch, web3)
+  const networkId = await web3.eth.net.getId()
 
-  const lotteryContract = await loadContract(dispatch, web3, network)
+  const lotteryContract = await loadContract(dispatch, web3, network, networkId)
   if (lotteryContract) {
     account = await loadAccount(web3, dispatch)
     if(account){

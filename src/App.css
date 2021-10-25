@@ -38,3 +38,16 @@
 }
 
 /* App styling */
+.app {
+  text-align: center;
+}
+
+.connection-container {
+  margin-top: 2%;
+  text-align: right;
+  margin-right: 5%;
+}
+
+.rules {
+  text-align: left;
+}
