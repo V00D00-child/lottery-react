@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { updateUserMessage } from "../store/actions"
 import { update } from "../store/interactions"
 import { 
@@ -12,8 +12,17 @@ export default function EnterLottery() {
   const lottery = useSelector(state => state.lottery);
   const connection = useSelector(state => state.connection);
   const account = useSelector(state => state.account);
+  const players = useSelector(state => state.players);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    players.forEach((player) => {
+      if (player === account) {
+        setiIsDisabled(true);
+      }
+    })
+  });
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -40,6 +49,7 @@ export default function EnterLottery() {
         <input
           value={value}
           onChange={(event) => setValue(event.target.value)}
+          disabled={isDisabled}
         />
       </div>
       <Button disabled={isDisabled}>Enter</Button>

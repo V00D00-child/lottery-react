@@ -24,6 +24,12 @@ export const Button = styled.button`
   padding: 0.25em 1em;
   border: 2px solid palevioletred;
   border-radius: 3px;
+
+  :disabled {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  }
 `;
 
 // App.js *******************************/
@@ -57,7 +63,6 @@ export const ConnectionContainer = styled.div`
   margin-right: 5%;
 `;
 
-
 // Nav.js *******************************/
 export const NavBar = styled.div`
   display: flex;
@@ -78,7 +83,6 @@ export const NavMenu = styled.div`
   justify-content: flex-start;
 `;
 
-
 export const NavLink = styled.div`
   display: block;
   padding: 1rem;
@@ -94,4 +98,3 @@ export const NavToggle = styled(NavLink)`
   position: static;
   color: red;
 `;
-
