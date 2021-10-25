@@ -1,3 +1,5 @@
+import { theme } from "../styles/theme";
+
 export const initialState = {
   connection: null,
   network: null,
@@ -9,7 +11,8 @@ export const initialState = {
   lastWinner: null,
   currentRound: null,
   poolBalance: null,
-  message: ''
+  message: '',
+  currentTheme: theme.dark,
 };
 
 export function reducer(state = initialState, action) {
@@ -35,6 +38,17 @@ export function reducer(state = initialState, action) {
         currentRound: action.payload.currentRound,
         poolBalance: action.payload.poolBalance,
       }
+    case "setTheme":
+      return { ...state, currentTheme: action.payload };
+    case "updateTheme":
+      return {
+        ...state,
+        currentTheme: { ...theme[state.currentTheme.id], ...action.payload }
+      };
+    case "toggleTheme": {
+      const newThemeKey = state.currentTheme.id === "dark" ? "light" : "dark";
+      return { ...state, currentTheme: theme[newThemeKey] };
+    }
     case 'CLEAR':
       state = initialState
       return { ...state }

@@ -48,6 +48,26 @@ export function userDataLoaded(userData) {
   }
 }
 
+export function toggleTheme() {
+  return {
+    type: "toggleTheme"
+  }
+}
+
+export function setTheme(id) {
+  return {
+    type: "setTheme",
+    payload: id
+  }
+}
+
+export function updateTheme(id) {
+  return {
+    type: "updateTheme",
+    payload: id
+  }
+}
+
 export function clear() {
   return {
     type: 'CLEAR'

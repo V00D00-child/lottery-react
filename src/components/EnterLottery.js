@@ -2,7 +2,9 @@ import { useSelector, useDispatch } from "react-redux";
 import React, { useState } from "react"
 import { updateUserMessage } from "../store/actions"
 import { update } from "../store/interactions"
-
+import { 
+  Button
+} from "../styles/rest"
 export default function EnterLottery() {
 
   const [value, setValue] = useState('');
@@ -40,7 +42,7 @@ export default function EnterLottery() {
           onChange={(event) => setValue(event.target.value)}
         />
       </div>
-      <button disabled={isDisabled}>Enter</button>
+      <Button disabled={isDisabled}>Enter</Button>
     </form>
   );
 }
