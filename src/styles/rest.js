@@ -33,20 +33,10 @@ export const Button = styled.button`
 `;
 
 // App.js *******************************/
-export const RulesContainer= styled.div`
-  text-align: left;
-`;
-
 export const AppHeader1 = styled.h1`
 `;
 
 export const AppHeader2 = styled.h2`
-`;
-
-export const RulesContent = styled.p`
-`;
-
-export const RulesLink = styled.a`
 `;
 
 export const MainApp = styled.div`
@@ -54,6 +44,15 @@ export const MainApp = styled.div`
 `;
 
 export const UserMessage = styled.p`
+`;
+
+
+// Rules.js *******************************/
+export const RulesContainer= styled.div`
+  text-align: left;
+`;
+
+export const RulesContent = styled.p`
 `;
 
 // Connection.js *******************************/
@@ -78,7 +77,7 @@ export const NavBar = styled.div`
 `;
 
 export const NavMenu = styled.div`
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: flex-start;
 `;
@@ -91,6 +90,9 @@ export const NavLink = styled.div`
     cursor: pointer;
     background-color: skyblue;
   }
+`;
+export const NavUserInfo = styled.div`
+  font-siz: 14px
 `;
 
 export const NavToggle = styled(NavLink)`

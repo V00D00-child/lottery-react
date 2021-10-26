@@ -6,10 +6,10 @@ export function web3Loaded(connection) {
   }
 }
 
-export function web3NetworkLoaded(network) {
+export function web3NetworkLoaded(networkObj) {
   return {
     type: 'WEB3_NETWORK_LOADED',
-    payload: network
+    payload: networkObj
   }
 }
 

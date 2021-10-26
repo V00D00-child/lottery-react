@@ -3,7 +3,9 @@ import { theme } from "../styles/theme";
 export const initialState = {
   connection: null,
   network: null,
+  networkId: null,
   account: null,
+  scanner: null,
   walletEthBalance: null,
   lottery: null,
   manager: null,
@@ -20,7 +22,13 @@ export function reducer(state = initialState, action) {
     case 'WEB3_LOADED':
       return { ...state, connection: action.payload }
     case 'WEB3_NETWORK_LOADED':
-      return { ...state, network: action.payload, message: '' }
+      return { 
+        ...state,
+        network: action.payload.network,
+        networkId: action.payload.networkId,
+        scanner: action.payload.scanner,
+        message: '' 
+      }
     case 'WEB3_ACCOUNT_LOADED':
       return { ...state, account: action.payload }
     case 'WEB3_BALANCE_LOADED':

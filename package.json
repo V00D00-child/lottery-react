@@ -43,16 +43,18 @@
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "mocha",
     "eject": "react-scripts eject",
-    "compile": "truffle compile",
-    "migrate": "truffle migrate",
+    "compile:ethereum": "truffle compile",
     "deploy:contract:dev": "truffle migrate --reset",
     "deploy:contract:kovan": "truffle migrate --reset --network kovan",
     "deploy:contract:rinkeby": "truffle migrate --reset --network rinkeby",
     "deploy:contract:ropsten": "truffle migrate --reset --network ropsten",
     "deploy:contract:main": "truffle migrate --network main",
+    "compile:arbitrum": "truffle compile --config truffle-config.arbitrum.js",
+    "deploy:arbitrum:arbitrum_testnet": "truffle migrate --config truffle-config.arbitrum.js --network arbitrum_testnet --rest",
     "findContracts": "truffle networks",
-    "contact:flatten": "npx truffle-flattener ./src/contracts/Lottery.sol > ./Lottery.sol",
-    "contract:complile": "npx truffle compile"
+    "contact:flatten": "npx truffle-flattener ./src/contracts/ethereum-contracts/Lottery.sol > ./Lottery.sol",
+    "test:ethereum": "truffle test",
+    "test:arbitrum": "truffle test --config truffle-config.arbitrum.js --network $npm_config_network"
   },
   "eslintConfig": {
     "extends": [

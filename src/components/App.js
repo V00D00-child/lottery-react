@@ -27,7 +27,7 @@ export default function App() {
       <GlobalStyles />
       <Nav />
       <MainApp>
-        <AppHeader1>Smart contract Lottery</AppHeader1>
+        <AppHeader1>Lottery Smart contract</AppHeader1>
         <Rules />
         <hr></hr>
         <Connection />

@@ -5,9 +5,21 @@ Player must submit a minimum ammount of 0.02 ETH to enter into the lottery pool.
 - ropsten: 0x4e781145626e90d438b1A5D035ECc8A1198358C2
 - https://ropsten.etherscan.io/address/0x4e781145626e90d438b1A5D035ECc8A1198358C2
 
+- kovan: 0xE412A7396AcC914Ee9F026B4DF3E0AF0034D9ce5
+- https://kovan.etherscan.io/address/0xE412A7396AcC914Ee9F026B4DF3E0AF0034D9ce5
+
 # Running locally
 - npm install
+- start local Ganache blockchain
+- npm run deploy:contract:dev
 - npm run start
 - navigate to http://localhost:3000/
-- connect to ropsten network using metamask
 - enter into lottery
+
+# Layer 2 scaling soultion Abritrum
+- https://developer.offchainlabs.com/docs/inside_arbitrum
+
+## Arbitrum Box
+- https://www.trufflesuite.com/blog/truffle-and-infura-support-arbitrum
+- https://github.com/truffle-box/arbitrum-box
+- box: https://www.trufflesuite.com/boxes/arbitrum

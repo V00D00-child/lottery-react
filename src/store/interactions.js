@@ -8,8 +8,28 @@ import {
   userDataLoaded,
   clear
 } from './actions'
-import Lottery from '../abis/Lottery.json';
+import LotteryEthereum from '../abis/ethereum-contracts/Lottery.json';
+import LotteryArbitrum from '../abis/arbitrum-contracts/Lottery.json';
 
+const NETWORKS = {
+  '1': 'Mainnet Ethereum',
+  '3': 'Ropsten Ethereum',
+  '42': 'Kovan Ethereum',
+  '4': 'Rinkeby Ethereum',
+  '5777': 'Ethereum Local',
+  '421611': 'Arbitrum Rinkeby',
+  '42161': 'Arbitrum Mainnet',
+  '10': 'Arbitrum Local'
+};
+
+const SCANNERS = {
+  '1': 'https://etherscan.io/address',
+  '3': 'https://ropsten.etherscan.io/address',
+  '42': 'https://kovan.etherscan.io/address',
+  '4': 'https://rinkeby.etherscan.io/address',
+  '421611': 'https://rinkeby-explorer.arbitrum.io/address',
+  '42161': 'https://explorer.offchainlabs.com/address',
+};
 
 export const loadWeb3 = async (dispatch) => {
   if(typeof window.ethereum!=='undefined'){
@@ -25,9 +45,15 @@ export const loadWeb3 = async (dispatch) => {
 
 export const loadNetwork = async (dispatch, web3) => {
   try{
-    let network = await web3.eth.net.getNetworkType()
-    network = network.charAt(0).toUpperCase()+network.slice(1)
-    dispatch(web3NetworkLoaded(network))
+    let network;
+    const networkId = await web3.eth.net.getId()
+    network = NETWORKS[networkId.toString()] 
+    const networkObj = {
+      network,
+      networkId,
+      scanner: SCANNERS[networkId.toString()]
+    };
+    dispatch(web3NetworkLoaded(networkObj))
     return network
   } catch (e) {
     dispatch(web3NetworkLoaded('Wrong network'))
@@ -58,11 +84,15 @@ export const loadBalance = async (dispatch, web3, account) => {
   }
 }
 
-export const loadContract = async (dispatch, web3, network, networkId) => {
+export const loadContract = async (dispatch, web3, networkId) => {
   try {
-    if (network === 'Ropsten') {
-      const contract = new web3.eth.Contract(Lottery.abi, Lottery.networks[networkId].address)
-      dispatch(lotteryContractLoaded(contract)) //create in action.js and add to reducers.js
+    if (networkId ===  3 || networkId === 42 || networkId === 5777) {
+      const contract = new web3.eth.Contract(LotteryEthereum.abi, LotteryEthereum.networks[networkId].address)
+      dispatch(lotteryContractLoaded(contract))
+      return contract
+    } else if (networkId === 421611) {
+      const contract = new web3.eth.Contract(LotteryArbitrum.abi, LotteryArbitrum.networks[networkId].address)
+      dispatch(lotteryContractLoaded(contract))
       return contract
     } else {
       dispatch(clear())
@@ -102,13 +132,13 @@ export const loadUserData = async (dispatch, contract, web3) => {
 
 // update web3 connection
 export const update = async (dispatch) => {
-  let account, web3, network
+  let account, web3
 
   web3 = await loadWeb3(dispatch)
-  network = await loadNetwork(dispatch, web3)
+  await loadNetwork(dispatch, web3)
   const networkId = await web3.eth.net.getId()
 
-  const lotteryContract = await loadContract(dispatch, web3, network, networkId)
+  const lotteryContract = await loadContract(dispatch, web3, networkId)
   if (lotteryContract) {
     account = await loadAccount(web3, dispatch)
     if(account){

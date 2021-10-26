@@ -2,8 +2,7 @@ import React from "react";
 import {
   RulesContainer,
   AppHeader2,
-  RulesContent,
-  RulesLink
+  RulesContent
 } from "../styles/rest"
 
 export default function Rules() {
@@ -18,7 +17,10 @@ export default function Rules() {
         address with receive all ETH in the lottery pool. After the lottery winner is 
         selected the smart contacts state will reset and a new lottery round can start.
       </RulesContent>
-      <RulesContent>Lottery smart contract(Ropsten Test Network):<RulesLink target="_blank" rel="noopener noreferrer" href="https://ropsten.etherscan.io/address/0x4e781145626e90d438b1A5D035ECc8A1198358C2">https://ropsten.etherscan.io/address/0x4e781145626e90d438b1A5D035ECc8A1198358C2</RulesLink></RulesContent>
+      <AppHeader2>Network support</AppHeader2>
+      <RulesContent>- Ropsten Ethereum</RulesContent>
+      <RulesContent>- Kovan Ethereum</RulesContent>
+      <RulesContent>- Arbitrum Rinkeby(comming soon)</RulesContent>
     </RulesContainer>
   );
 }

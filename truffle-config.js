@@ -61,17 +61,16 @@ module.exports = {
       network_id: 1
     },
   },
-  contracts_directory: './src/contracts/',
-  contracts_build_directory: './src/abis/',
+  contracts_directory: './src/contracts/ethereum',
+  contracts_build_directory: './src/abis/ethereum-contracts',
+  migrations_directory: './migrations_ethereum/',
   compilers: {
     solc: {
       version:'0.4.17',
-      solc: {
+      settings:  {
         optimizer: {
-        optimizer: {
-          enabled: false,
+          enabled: true,
           runs: 200
-        },
         }
       }
     },
