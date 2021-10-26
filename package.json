@@ -10,7 +10,7 @@
     "dapp",
     "web3",
     "ethereum",
-    "template"
+    "Arbitrum"
   ],
   "dependencies": {
     "babel-polyfill": "6.26.0",

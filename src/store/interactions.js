@@ -27,6 +27,7 @@ const SCANNERS = {
   '3': 'https://ropsten.etherscan.io/address',
   '42': 'https://kovan.etherscan.io/address',
   '4': 'https://rinkeby.etherscan.io/address',
+  '5777': 'https://etherscan.io/address',
   '421611': 'https://rinkeby-explorer.arbitrum.io/address',
   '42161': 'https://explorer.offchainlabs.com/address',
 };
