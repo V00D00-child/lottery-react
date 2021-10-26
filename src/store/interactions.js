@@ -32,7 +32,7 @@ const SCANNERS = {
 };
 
 export const loadWeb3 = async (dispatch) => {
-  if(typeof window.ethereum!=='undefined'){
+  if(typeof window.ethereum !== 'undefined'){
     window.ethereum.autoRefreshOnNetworkChange = false;
     const web3 = new Web3(window.ethereum)
     dispatch(web3Loaded(web3))
@@ -61,15 +61,20 @@ export const loadNetwork = async (dispatch, web3) => {
   }
 }
 
-export const loadAccount = async (web3, dispatch) => {
-  const accounts = await web3.eth.getAccounts()
-  const account = await accounts[0].toLowerCase()
-  if(typeof account !== 'undefined'){
-    dispatch(web3AccountLoaded(account))
-    return account
-  } else {
-    dispatch(web3AccountLoaded(null))
-    return null
+export const loadAccount = async (dispatch) => {
+  if(typeof window.ethereum !== 'undefined') {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const account = await accounts[0]
+
+    if(typeof account !== 'undefined') {
+      dispatch(web3AccountLoaded(account.toLowerCase()))
+      return account
+    } else {
+      dispatch(web3AccountLoaded(null))
+      window.alert('Please install MetaMask')
+      window.location.assign("https://metamask.io/")
+      return null
+    }
   }
 }
 
@@ -135,7 +140,7 @@ export const update = async (dispatch) => {
 
   const lotteryContract = await loadContract(dispatch, web3, networkId)
   if (lotteryContract) {
-    account = await loadAccount(web3, dispatch)
+    account = await loadAccount(dispatch)
     if(account){
       await loadBalance(dispatch, web3, account)
       await loadUserData(dispatch, lotteryContract, web3)
