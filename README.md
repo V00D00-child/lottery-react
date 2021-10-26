@@ -74,5 +74,5 @@ npm run deploy:arbitrum:arbitrum_testnet
 
 ## TODO
 - Add support for Arbitrum Layer 2
-- Upgrade Lottery smart contract pick winner pseudoRandom number genrator with Chainlink VRF (Verifiable Random Function) 
+- Upgrade Lottery smart contract pick winner pseudoRandom number generator with Chainlink VRF (Verifiable Random Function) 
 [Chainlink VRF docs](https://docs.chain.link/docs/chainlink-vrf/)
