@@ -2,6 +2,9 @@ import { useSelector, useDispatch } from "react-redux";
 import React, { useState } from "react"
 import { updateUserMessage } from "../store/actions"
 import { update } from "../store/interactions"
+import { 
+  Button
+} from "../styles/rest"
 
 export default function PickWinner() {
 
@@ -29,7 +32,7 @@ export default function PickWinner() {
   return (
     <div>
         <h4>Ready to pick a winner?</h4>
-        <button disabled={isDisabled} onClick={pickWinner}>Pick winner</button>
+        <Button disabled={isDisabled} onClick={pickWinner}>Pick winner</Button>
     </div>
   );
 }

@@ -6,7 +6,8 @@ import {
   web3BalanceLoaded,
   lotteryContractLoaded,
   userDataLoaded,
-  clear
+  clear,
+  setisEntered
 } from './actions'
 import LotteryEthereum from '../abis/ethereum-contracts/Lottery.json';
 
@@ -68,7 +69,7 @@ export const loadAccount = async (dispatch) => {
 
     if(typeof account !== 'undefined') {
       dispatch(web3AccountLoaded(account.toLowerCase()))
-      return account
+      return account.toLowerCase()
     } else {
       dispatch(web3AccountLoaded(null))
       window.alert('Please install MetaMask')
@@ -105,7 +106,7 @@ export const loadContract = async (dispatch, web3, networkId) => {
   }
 }
 
-export const loadUserData = async (dispatch, contract, web3) => {
+export const loadUserData = async (dispatch, contract, web3, account) => {
   try {
     const manager = await contract.methods.manager().call();
     const players = await contract.methods.getPlayers().call();
@@ -122,6 +123,16 @@ export const loadUserData = async (dispatch, contract, web3) => {
       currentRound,
       poolBalance: web3.utils.fromWei(poolBalance, 'ether')
     }
+
+    // check enter state
+    formatedPlayers.forEach((player) => {
+      console.log(player)
+      if (player === account && player !== manager) {
+        dispatch(setisEntered(true));
+      } else {
+        dispatch(setisEntered(false));
+      }
+    })
 
     dispatch(userDataLoaded(userData))
     return userData
@@ -143,7 +154,7 @@ export const update = async (dispatch) => {
     account = await loadAccount(dispatch)
     if(account){
       await loadBalance(dispatch, web3, account)
-      await loadUserData(dispatch, lotteryContract, web3)
+      await loadUserData(dispatch, lotteryContract, web3, account)
     }
   }
 }

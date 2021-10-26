@@ -28,8 +28,7 @@ export default function App() {
       <Nav />
       <MainApp>
         <AppHeader1>Lottery Smart contract</AppHeader1>
-        <Rules />
-        <hr></hr>
+        <p>(minimum ammount of 0.02 ETH to enter)</p>
         <Connection />
         <LotteryInfo />
         <hr></hr>
@@ -42,6 +41,8 @@ export default function App() {
         }
         <hr></hr>
         <UserMessage>{message}</UserMessage>
+        <hr></hr>
+        <Rules />
       </MainApp>
     </ThemeProvider>
   );

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-import React, { useState, useEffect } from "react"
-import { updateUserMessage } from "../store/actions"
+import React, { useState } from "react"
+import { updateUserMessage, setisEntered } from "../store/actions"
 import { update } from "../store/interactions"
 import { 
   Button
@@ -8,27 +8,31 @@ import {
 export default function EnterLottery() {
 
   const [value, setValue] = useState('');
-  const [isDisabled, setiIsDisabled] = useState(false);
   const lottery = useSelector(state => state.lottery);
   const connection = useSelector(state => state.connection);
   const account = useSelector(state => state.account);
-  const players = useSelector(state => state.players);
+  const isEntered = useSelector(state => state.isEntered);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    players.forEach((player) => {
-      if (player === account) {
-        setiIsDisabled(true);
-      }
-    })
-  });
-
   const onSubmit = async (event) => {
     event.preventDefault();
-    dispatch(updateUserMessage('Waiting on transaction success...'))
+    dispatch(updateUserMessage(''))
 
-    setiIsDisabled(true);
+    // minimum ammount of 0.02 ETH to enter validation
+    const parsed = parseFloat(value, 10)
+    console.log(parsed)
+    if (isNaN(parsed)) {
+      setValue('')
+      dispatch(updateUserMessage('Please only enter valid numbers'))
+      return;
+    } else if (parsed < 0.02) {
+      dispatch(updateUserMessage('The minimum ammount to enter is 0.02 ETH'))
+      return;
+    }
+
+    dispatch(updateUserMessage('Waiting on transaction success...'))
+    dispatch(setisEntered(true));
 
     await lottery.methods.enter().send({
       from: account,
@@ -36,7 +40,6 @@ export default function EnterLottery() {
     });
 
     setValue('')
-    setiIsDisabled(false);
     dispatch(updateUserMessage('You have been entered!'))
     update(dispatch)
   };
@@ -49,10 +52,10 @@ export default function EnterLottery() {
         <input
           value={value}
           onChange={(event) => setValue(event.target.value)}
-          disabled={isDisabled}
+          disabled={isEntered}
         />
       </div>
-      <Button disabled={isDisabled}>Enter</Button>
+      <Button disabled={isEntered}>Enter</Button>
     </form>
   );
 }

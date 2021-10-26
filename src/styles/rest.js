@@ -45,6 +45,7 @@ export const MainApp = styled.div`
 `;
 
 export const UserMessage = styled.p`
+  color: green;
 `;
 
 

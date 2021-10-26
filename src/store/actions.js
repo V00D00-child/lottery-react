@@ -73,3 +73,10 @@ export function clear() {
     type: 'CLEAR'
   }
 }
+
+export function setisEntered(isEntered) {
+  return {
+    type: "updateEnteredStatus",
+    payload: isEntered
+  }
+}

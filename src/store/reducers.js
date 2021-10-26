@@ -14,6 +14,7 @@ export const initialState = {
   currentRound: null,
   poolBalance: null,
   message: '',
+  isEntered: null,
   currentTheme: theme.dark,
 };
 
@@ -46,6 +47,8 @@ export function reducer(state = initialState, action) {
         currentRound: action.payload.currentRound,
         poolBalance: action.payload.poolBalance,
       }
+    case "updateEnteredStatus":
+      return { ...state, isEntered: action.payload };
     case "setTheme":
       return { ...state, currentTheme: action.payload };
     case "updateTheme":
