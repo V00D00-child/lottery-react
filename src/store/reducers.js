@@ -14,7 +14,7 @@ export const initialState = {
   currentRound: null,
   poolBalance: null,
   message: '',
-  isEntered: null,
+  isEntered: false,
   currentTheme: theme.dark,
 };
 

@@ -21,7 +21,6 @@ export default function EnterLottery() {
 
     // minimum ammount of 0.02 ETH to enter validation
     const parsed = parseFloat(value, 10)
-    console.log(parsed)
     if (isNaN(parsed)) {
       setValue('')
       dispatch(updateUserMessage('Please only enter valid numbers'))

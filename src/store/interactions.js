@@ -126,11 +126,8 @@ export const loadUserData = async (dispatch, contract, web3, account) => {
 
     // check enter state
     formatedPlayers.forEach((player) => {
-      console.log(player)
       if (player === account && player !== manager) {
         dispatch(setisEntered(true));
-      } else {
-        dispatch(setisEntered(false));
       }
     })
 
