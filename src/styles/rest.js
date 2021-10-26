@@ -41,6 +41,7 @@ export const AppHeader2 = styled.h2`
 
 export const MainApp = styled.div`
   text-align: center;
+  margin: 0 5% 0 5%;
 `;
 
 export const UserMessage = styled.p`
@@ -99,4 +100,11 @@ export const NavToggle = styled(NavLink)`
   text-decoration: underline;
   position: static;
   color: red;
+`;
+
+// LotteryInfo.js *******************************/
+export const LotteryPool = styled.div`
+  border: solid 2px;
+  padding: 2%;
+  margin-top: 3%;
 `;

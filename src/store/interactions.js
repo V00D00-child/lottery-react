@@ -9,7 +9,6 @@ import {
   clear
 } from './actions'
 import LotteryEthereum from '../abis/ethereum-contracts/Lottery.json';
-import LotteryArbitrum from '../abis/arbitrum-contracts/Lottery.json';
 
 const NETWORKS = {
   '1': 'Mainnet Ethereum',
@@ -70,7 +69,6 @@ export const loadAccount = async (web3, dispatch) => {
     return account
   } else {
     dispatch(web3AccountLoaded(null))
-    console.log('logout')
     return null
   }
 }
@@ -91,13 +89,9 @@ export const loadContract = async (dispatch, web3, networkId) => {
       const contract = new web3.eth.Contract(LotteryEthereum.abi, LotteryEthereum.networks[networkId].address)
       dispatch(lotteryContractLoaded(contract))
       return contract
-    } else if (networkId === 421611) {
-      const contract = new web3.eth.Contract(LotteryArbitrum.abi, LotteryArbitrum.networks[networkId].address)
-      dispatch(lotteryContractLoaded(contract))
-      return contract
     } else {
       dispatch(clear())
-      window.alert('Lottery smart contract not detected on the current network. Please select another network with Metamask. Currenlty depolyed on Ropsten.');
+      window.alert('Lottery smart contract not detected on the current network. Please select another network with Metamask.');
       window.location.reload();
       return null;
     } 

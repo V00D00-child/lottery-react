@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 import React from "react";
-
+import { 
+  LotteryPool
+} from "../styles/rest"
 export default function LotteryInfo() {
 
   const manager = useSelector(state => state.manager);
@@ -11,7 +13,7 @@ export default function LotteryInfo() {
   const players = useSelector(state => state.players);
 
   return (
-  	<div>
+  	<LotteryPool>
       <h2>Players entered into Pool:</h2>
       {players.length > 0 &&
         players.map((player, index) => {
@@ -27,6 +29,6 @@ export default function LotteryInfo() {
       <p>The lottery contract is managed by: {manager}.</p>
       <p>There are currently {players.length} people entered,
       competing to win {poolBalance} Ether!</p>
-    </div>
+    </LotteryPool>
   );
 }
