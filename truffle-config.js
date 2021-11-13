@@ -66,7 +66,7 @@ module.exports = {
   migrations_directory: './migrations_ethereum/',
   compilers: {
     solc: {
-      version:'0.4.17',
+      version:'0.8.7',
       settings:  {
         optimizer: {
           enabled: true,

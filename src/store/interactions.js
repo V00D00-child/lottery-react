@@ -9,7 +9,7 @@ import {
   clear,
   setisEntered
 } from './actions'
-import LotteryEthereum from '../abis/ethereum-contracts/Lottery.json';
+import LotteryEthereum from '../abis/ethereum-contracts/LotteryV2.json';
 
 const NETWORKS = {
   '1': 'Mainnet Ethereum',
@@ -91,7 +91,7 @@ export const loadBalance = async (dispatch, web3, account) => {
 
 export const loadContract = async (dispatch, web3, networkId) => {
   try {
-    if (networkId ===  3 || networkId === 42 || networkId === 5777) {
+    if (networkId ===  4 || networkId === 42 || networkId === 5777) {
       const contract = new web3.eth.Contract(LotteryEthereum.abi, LotteryEthereum.networks[networkId].address)
       dispatch(lotteryContractLoaded(contract))
       return contract

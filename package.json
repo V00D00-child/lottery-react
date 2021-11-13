@@ -13,6 +13,8 @@
     "Arbitrum"
   ],
   "dependencies": {
+    "@chainlink/contracts": "^0.2.1",
+    "@openzeppelin/contracts": "^4.1.0",
     "babel-polyfill": "6.26.0",
     "babel-preset-env": "1.7.0",
     "babel-preset-es2015": "6.24.1",
@@ -52,7 +54,7 @@
     "compile:arbitrum": "truffle compile --config truffle-config.arbitrum.js",
     "deploy:arbitrum:arbitrum_testnet": "truffle migrate --config truffle-config.arbitrum.js --network arbitrum_testnet --rest",
     "findContracts": "truffle networks",
-    "contact:flatten": "npx truffle-flattener ./src/contracts/ethereum-contracts/Lottery.sol > ./Lottery.sol",
+    "contact:flatten": "npx truffle-flattener ./src/contracts/ethereum/LotteryV2.sol > ./Lottery.txt",
     "test:ethereum": "truffle test",
     "test:arbitrum": "truffle test --config truffle-config.arbitrum.js --network $npm_config_network"
   },
